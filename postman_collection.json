@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "f9e946cd-d15b-42a3-8e54-a0422100ea58",
+		"name": "dp-task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23340775"
+	},
+	"item": [
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "gateway-one",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"merchant_id\": 6,\r\n    \"payment_id\": 13,\r\n    \"status\": \"completed\",\r\n    \"amount\": 500,\r\n    \"amount_paid\": 500,\r\n    \"timestamp\": 1654103837,\r\n    \"sign\": \"f027612e0e6cb321ca161de060237eeb97e46000da39d3add08d09074f931728\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/payment/one?XDEBUG_SESSION={{XDEBUG_SESSION}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"payment",
+								"one"
+							],
+							"query": [
+								{
+									"key": "XDEBUG_SESSION",
+									"value": "{{XDEBUG_SESSION}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "gateway-one",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"merchant_id\": 6,\r\n    \"payment_id\": 13,\r\n    \"status\": \"completed\",\r\n    \"amount\": 700,\r\n    \"amount_paid\": 500,\r\n    \"timestamp\": 1654103837,\r\n    \"sign\": \"b6029dedbb07c3eef1b0756c8fa9fdb3b1daedfe65ab54170f1b12830a122943\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/payment/one?XDEBUG_SESSION={{XDEBUG_SESSION}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"payment",
+										"one"
+									],
+									"query": [
+										{
+											"key": "XDEBUG_SESSION",
+											"value": "{{XDEBUG_SESSION}}"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:80"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Oct 2022 11:52:38 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Oct 2022 11:52:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						}
+					]
+				},
+				{
+					"name": "gateway-two",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "d84eb9036bfc2fa7f46727f101c73c73",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "project",
+									"value": "816",
+									"type": "text"
+								},
+								{
+									"key": "invoice",
+									"value": "73",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "completed",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "700",
+									"type": "text"
+								},
+								{
+									"key": "amount_paid",
+									"value": "700",
+									"type": "text"
+								},
+								{
+									"key": "rand",
+									"value": "SNuHufEJ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/payment/two?XDEBUG_SESSION={{XDEBUG_SESSION}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"payment",
+								"two"
+							],
+							"query": [
+								{
+									"key": "XDEBUG_SESSION",
+									"value": "{{XDEBUG_SESSION}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "PORT",
+			"value": "80",
+			"type": "string"
+		},
+		{
+			"key": "URL",
+			"value": "{{HOST}}:{{PORT}}/api",
+			"type": "string"
+		},
+		{
+			"key": "XDEBUG_SESSION",
+			"value": "PHPSTORM",
+			"type": "string"
+		}
+	]
+}
