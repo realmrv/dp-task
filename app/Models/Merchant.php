@@ -2,43 +2,56 @@
 
 namespace App\Models;
 
+use Database\Factories\MerchantFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
- * App\Models\Merchant
+ * App\Models\Merchant.
  *
  * @property int $id
  * @property string $external_id
  * @property string|null $external_key
  * @property int $user_id
  * @property int $gateway_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Gateway|null $gateway
- * @method static \Database\Factories\MerchantFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant query()
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereExternalId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereExternalKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereGatewayId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Merchant whereUserId($value)
- * @mixin \Eloquent
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Gateway|null $gateway
+ *
+ * @method static MerchantFactory factory(...$parameters)
+ * @method static Builder|Merchant newModelQuery()
+ * @method static Builder|Merchant newQuery()
+ * @method static Builder|Merchant query()
+ * @method static Builder|Merchant whereCreatedAt($value)
+ * @method static Builder|Merchant whereExternalId($value)
+ * @method static Builder|Merchant whereExternalKey($value)
+ * @method static Builder|Merchant whereGatewayId($value)
+ * @method static Builder|Merchant whereId($value)
+ * @method static Builder|Merchant whereUpdatedAt($value)
+ * @method static Builder|Merchant whereUserId($value)
+ *
+ * @mixin Eloquent
+ *
+ * @property Collection|Payment[] $payments
+ * @property int|null $payments_count
  */
 class Merchant extends Model
 {
     use HasFactory;
 
-    /**
-     * @return HasOne
-     */
-    public function gateway()
+    public function gateway(): BelongsTo
     {
-        return $this->hasOne(Gateway::class);
+        return $this->belongsTo(Gateway::class);
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 }

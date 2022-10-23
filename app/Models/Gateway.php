@@ -2,31 +2,44 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
- * App\Models\Gateway
+ * App\Models\Gateway.
  *
  * @property int id
  * @property string $name
  * @property string $code
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Gateway newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Gateway newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Gateway query()
- * @method static \Illuminate\Database\Eloquent\Builder|Gateway whereCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Gateway whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Gateway whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Gateway whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Gateway whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @property int|null $amount_limit
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ *
+ * @method static Builder|Gateway newModelQuery()
+ * @method static Builder|Gateway newQuery()
+ * @method static Builder|Gateway query()
+ * @method static Builder|Gateway whereCode($value)
+ * @method static Builder|Gateway whereCreatedAt($value)
+ * @method static Builder|Gateway whereId($value)
+ * @method static Builder|Gateway whereName($value)
+ * @method static Builder|Gateway whereUpdatedAt($value)
+ * @method static Builder|Gateway whereAmountLimit($value)
+ *
+ * @mixin Eloquent
+ *
+ * @property Merchant[]|null $merchants
+ * @property int|null                    $merchants_count
  */
 class Gateway extends Model
 {
     use HasFactory;
 
-    public const ONE_GATEWAY_CODE = 'one';
-    public const TWO_GATEWAY_CODE = 'two';
+    public function merchants(): HasMany
+    {
+        return $this->hasMany(Merchant::class);
+    }
 }
