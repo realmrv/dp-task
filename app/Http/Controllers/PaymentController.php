@@ -2,26 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use App\Enums\GatewayCodeEnum;
+use App\Http\Dto\PaymentNotificationDto;
+use App\Http\Requests\OnePaymentRequest;
+use App\Http\Requests\TwoPaymentRequest;
+use App\Services\PaymentService;
 
 class PaymentController extends Controller
 {
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function one(Request $request)
+    public function __construct(private readonly PaymentService $paymentService)
     {
-        return response()->json(null, Response::HTTP_CREATED);
     }
 
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function two(Request $request)
+    public function one(OnePaymentRequest $request)
     {
-        return response()->json(null, Response::HTTP_CREATED);
+        $params = $request->validated();
+        $this->paymentService->store(
+            new PaymentNotificationDto(
+                $params['merchant_id'],
+                $params['payment_id'],
+                $params['status'],
+                $params['amount'],
+                $params['amount_paid'],
+            ),
+            GatewayCodeEnum::One
+        );
+    }
+
+    public function two(TwoPaymentRequest $request)
+    {
+        $params = $request->validated();
+        $this->paymentService->store(
+            new PaymentNotificationDto(
+                $params['project'],
+                $params['invoice'],
+                $params['status'],
+                $params['amount'],
+                $params['amount_paid'],
+            ),
+            GatewayCodeEnum::Two
+        );
     }
 }
