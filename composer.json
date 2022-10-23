@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "realmrv/dp-task",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Test task on Laravel",
+    "keywords": ["framework", "laravel", "test-task"],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
@@ -14,7 +14,7 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
+        "laravel/pint": "^1.2",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
