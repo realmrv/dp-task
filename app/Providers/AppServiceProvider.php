@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Enums\GatewayCodeEnum;
+use App\Services\OneRequestSignCheckerService;
+use App\Services\TwoRequestSignCheckerService;
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,11 +15,18 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         if ($this->app->isLocal()) {
-            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+            $this->app->register(IdeHelperServiceProvider::class);
         }
+
+        $this->app->when([OneRequestSignCheckerService::class])
+            ->needs('$gatewayCode')
+            ->give(GatewayCodeEnum::One->value);
+        $this->app->when([TwoRequestSignCheckerService::class])
+            ->needs('$gatewayCode')
+            ->give(GatewayCodeEnum::Two->value);
     }
 
     /**
@@ -23,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }
