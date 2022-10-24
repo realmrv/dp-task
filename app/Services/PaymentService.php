@@ -51,6 +51,6 @@ final class PaymentService implements IPaymentService
     {
         return Payment::whereRelation('merchant.gateway', 'code', $gatewayCodeEnum->value)
             ->whereDate('created_at', CarbonImmutable::today())
-            ->sum('amount');
+            ->sum('amount_paid');
     }
 }
